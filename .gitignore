@@ -17,6 +17,7 @@
 # Build
 build/
 *.zip
+*.pdf
 
 # Terraform
 .terraform/
