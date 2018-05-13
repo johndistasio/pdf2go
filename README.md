@@ -34,4 +34,6 @@ $ terraform apply
 $ curl -X POST -d 'World' -i -H 'Accept: application/pdf' '<invoke_url>' -o test.pdf
 ```
 
+Note: The `Accept` header is required for AWS to properly return a PDF.
+
 6) Open the PDF.
