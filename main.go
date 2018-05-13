@@ -3,30 +3,25 @@ package main
 import (
 	"bytes"
 	"encoding/base64"
-	"errors"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/jung-kurt/gofpdf"
 	"log"
 )
 
-var (
-	// ErrNameNotProvided is thrown when a name is not provided
-	ErrNameNotProvided = errors.New("no named was provided in the HTTP body")
-)
-
 // Handler processes incoming requests
 func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	// stdout and stderr and sent to cloudwatch
-	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
-
-	// If no name is provided in HTTP body, throw an error
 	if len(request.Body) < 1 {
+		log.Print("Bad request: no body provided\n")
 		return events.APIGatewayProxyResponse{
 			StatusCode: 400,
-		}, ErrNameNotProvided
+		}, nil
 	}
+
+	// stdout and stderr and sent to cloudwatch
+	log.Printf("Processing Lambda request %s: %s\n",
+		request.RequestContext.RequestID, request.Body)
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
