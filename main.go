@@ -31,7 +31,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
 	pdf.SetFont("Arial", "B", 16)
-	pdf.Cell(40, 10, "Hello, "+request.Body)
+	pdf.Cell(40, 10, "Hello "+request.Body)
 
 	var buf bytes.Buffer
 	pdf.Output(&buf)
