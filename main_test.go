@@ -19,11 +19,11 @@ func TestHandler(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestHandlerError(t *testing.T) {
+func TestHandlerBadRequest(t *testing.T) {
 	request := events.APIGatewayProxyRequest{}
 
 	response, err := main.Handler(request)
 
 	assert.Equal(t, 400, response.StatusCode)
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 }
