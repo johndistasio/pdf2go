@@ -3,13 +3,15 @@
 default: test build dist
 
 build:
-	GOOS=linux go build -o main
+	@mkdir -p build/
+	GOOS=linux go build -o build/main
 
 test:
 	go test
 
 dist:
-	zip deployment.zip main
+	zip -j deployment.zip build/main
 
 clean:
-	rm deployment.zip
+	-rm -rf build/
+	-rm deployment.zip
