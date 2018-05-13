@@ -39,12 +39,6 @@ resource "aws_lambda_function" "hello" {
   handler       = "main"
 
   role = "${aws_iam_role.lambda.arn}"
-
-  environment {
-    variables = {
-      NAME = "Hello"
-    }
-  }
 }
 
 resource "aws_api_gateway_rest_api" "hello" {
