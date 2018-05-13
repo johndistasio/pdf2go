@@ -27,3 +27,11 @@ $ export AWS_PROFILE=<profile>; export AWS_DEFAULT_REGION=<region>
 ```
 $ terraform apply
 ```
+
+5) Copy the `invoke_url` output into a `curl` invocation:
+
+```
+curl -X POST -d 'World' -i -H 'Accept: application/pdf' '<invoke_url>' -o test.pdf
+```
+
+6) Open the PDF.

@@ -52,8 +52,12 @@ resource "aws_api_gateway_rest_api" "hello" {
   binary_media_types = ["application/pdf"]
 }
 
+variable "resource_path" {
+  default = "hello"
+}
+
 resource "aws_api_gateway_resource" "hello" {
-  path_part   = "hello"
+  path_part   = "${var.resource_path}"
   parent_id   = "${aws_api_gateway_rest_api.hello.root_resource_id}"
   rest_api_id = "${aws_api_gateway_rest_api.hello.id}"
 }
@@ -121,5 +125,5 @@ resource "aws_api_gateway_deployment" "hello" {
 }
 
 output "invoke_url" {
-  value = "${aws_api_gateway_deployment.hello.invoke_url}"
+  value = "${aws_api_gateway_deployment.hello.invoke_url}/${var.resource_path}"
 }
