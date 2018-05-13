@@ -25,6 +25,11 @@ resource "aws_iam_role_policy_attachment" "lambda" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+resource "aws_iam_role_policy_attachment" "xray" {
+  role       = "${aws_iam_role.lambda.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+}
+
 variable "deployment_bundle" {
   default = "deployment.zip"
 }
@@ -39,6 +44,10 @@ resource "aws_lambda_function" "hello" {
   handler       = "main"
 
   role = "${aws_iam_role.lambda.arn}"
+
+  tracing_config {
+    mode = "Active"
+  }
 }
 
 resource "aws_api_gateway_rest_api" "hello" {
