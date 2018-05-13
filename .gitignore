@@ -11,14 +11,12 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# IDEA
-.idea
-*.iml
-*.ipr
-**/out/
-
 # Mac OS
 .DS_Store
+
+# Build
+build/
+*.zip
 
 # Terraform
 .terraform/
