@@ -12,16 +12,15 @@ import (
 // Handler processes incoming requests
 func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
+	// stdout and stderr and sent to cloudwatch
+	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
+
 	if len(request.Body) < 1 {
 		log.Print("Bad request: no body provided\n")
 		return events.APIGatewayProxyResponse{
 			StatusCode: 400,
 		}, nil
 	}
-
-	// stdout and stderr and sent to cloudwatch
-	log.Printf("Processing Lambda request %s: %s\n",
-		request.RequestContext.RequestID, request.Body)
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
