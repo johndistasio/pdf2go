@@ -9,12 +9,12 @@ import (
 
 func TestHandler(t *testing.T) {
 	request := events.APIGatewayProxyRequest{
-		Body: "NAME",
+		Body: "hello",
 	}
 
 	response, err := main.Handler(request)
 
-	assert.Equal(t, "Hello NAME", response.Body)
+	assert.Equal(t, "aGVsbG8=", response.Body)
 	assert.Nil(t, err)
 }
 
