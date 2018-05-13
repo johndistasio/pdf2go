@@ -22,7 +22,8 @@ func TestHandler(t *testing.T) {
 func TestHandlerError(t *testing.T) {
 	request := events.APIGatewayProxyRequest{}
 
-	_, err := main.Handler(request)
+	response, err := main.Handler(request)
 
+	assert.Equal(t, 400, response.StatusCode)
 	assert.NotNil(t, err)
 }

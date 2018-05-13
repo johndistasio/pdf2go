@@ -23,7 +23,9 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	// If no name is provided in HTTP body, throw an error
 	if len(request.Body) < 1 {
-		return events.APIGatewayProxyResponse{}, ErrNameNotProvided
+		return events.APIGatewayProxyResponse{
+			StatusCode: 400,
+		}, ErrNameNotProvided
 	}
 
 	pdf := gofpdf.New("P", "mm", "A4", "")
